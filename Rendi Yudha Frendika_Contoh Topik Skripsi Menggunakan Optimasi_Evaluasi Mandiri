@@ -1,0 +1,8 @@
+Optimasi Penempatan Distributed Generation Pada Penyulang Muara Aman Menggunakan Metode Particle Swarm Optimization (PSO)
+
+Penempatan Distributed Generation (DG) yang optimal pada jaringan distribusi listrik merupakan langkah strategis untuk meningkatkan efisiensi sistem, mengurangi rugi daya, serta meningkatkan profil tegangan. 
+Penelitian ini bertujuan untuk mengoptimalkan penempatan DG pada Penyulang Muara Aman menggunakan metode Particle Swarm Optimization (PSO). 
+PSO adalah algoritma metaheuristik yang terinspirasi dari perilaku sosial kawanan hewan, seperti burung atau ikan, dalam mencari solusi terbaik melalui mekanisme kolaborasi dan eksplorasi. 
+Dalam konteks ini, PSO digunakan untuk menentukan lokasi dan kapasitas DG yang optimal pada penyulang dengan mempertimbangkan berbagai parameter, seperti rugi daya aktif, profil tegangan, serta batasan teknis dan ekonomi sistem distribusi. 
+Metode ini dipilih karena kemampuan eksplorasi globalnya yang baik, waktu komputasi yang efisien, serta fleksibilitasnya dalam menangani masalah optimasi non-linear dan multi-objektif. 
+Hasil dari penelitian ini diharapkan dapat memberikan kontribusi signifikan terhadap pengoperasian jaringan distribusi yang lebih andal, efisien, dan berkelanjutan.
