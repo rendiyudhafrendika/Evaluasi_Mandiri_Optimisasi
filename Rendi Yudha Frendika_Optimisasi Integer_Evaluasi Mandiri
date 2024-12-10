@@ -1,0 +1,37 @@
+#Seorang petani memiliki lahan seluas 100 hektar yang ingin digunakan untuk menanam jagung dan gandum.
+#Setiap hektar jagung membutuhkan 3 unit pupuk dan 2 unit air, sementara setiap hektar gandum membutuhkan 1 unit pupuk dan 4 unit air.
+#Petani memiliki:
+#120 unit pupuk,
+#160 unit air.
+#Setiap hektar jagung memberikan keuntungan 40 unit, dan setiap hektar gandum memberikan keuntungan 30 unit. 
+#Petani ingin memaksimalkan keuntungan, dengan syarat bahwa jumlah hektar jagung dan gandum yang ditanam adalah bilangan bulat.
+
+using JuMP
+using HiGHS
+
+# Membuat model optimisasi
+model = Model(HiGHS.Optimizer)
+
+# Variabel keputusan (jumlah hektar jagung dan gandum)
+@variable(model, x[1:2] >= 0, Int) # x[1] = jagung, x[2] = gandum
+
+# Fungsi objektif: Maksimalkan keuntungan
+@objective(model, Max, 40 * x[1] + 30 * x[2])
+
+# Kendala:
+@constraint(model, 3 * x[1] + 1 * x[2] <= 120)  # Batas pupuk
+@constraint(model, 2 * x[1] + 4 * x[2] <= 160)  # Batas air
+@constraint(model, x[1] + x[2] <= 100)          # Luas lahan maksimum
+
+# Menyelesaikan masalah
+optimize!(model)
+
+# Menampilkan hasil
+if termination_status(model) == MOI.OPTIMAL
+    println("Solusi optimal ditemukan!")
+    println("Hektar jagung (x[1]): ", value(x[1]))
+    println("Hektar gandum (x[2]): ", value(x[2]))
+    println("Keuntungan maksimum: ", objective_value(model))
+else
+    println("Tidak ditemukan solusi optimal.")
+end
