@@ -1,0 +1,42 @@
+#Seorang perusahaan memproduksi dua jenis produk, 𝑃1 dan 𝑃2. 
+#Setiap unit 𝑃1 ​ memberikan keuntungan 50 unit, 
+#dan 𝑃2 ​ memberikan keuntungan 40 unit. 
+#Produksi masing-masing produk membutuhkan bahan baku dan waktu mesin sebagai berikut: 
+#​𝑃1 : 5 unit bahan baku, 3 jam waktu mesin. 
+#𝑃2 ​ : 4 unit bahan baku, 1 jam waktu mesin. 
+#Perusahaan memiliki batasan: 
+#Maksimum 100 unit bahan baku. 
+#Maksimum 45 jam waktu mesin.
+#Produk 𝑃1 hanya dapat diproduksi dalam jumlah bulat 
+#sedangkan 𝑃2 dapat diproduksi dalam jumlah fraksional (kontinu). 
+#Tujuannya adalah memaksimalkan keuntungan perusahaan.
+
+using JuMP
+using HiGHS
+
+# Membuat model optimisasi
+model = Model(HiGHS.Optimizer)
+
+# Variabel keputusan
+@variable(model, x1 >= 0, Int)  # Jumlah produk P1 (integer)
+@variable(model, x2 >= 0)       # Jumlah produk P2 (kontinu)
+
+# Fungsi objektif: Maksimalkan keuntungan
+@objective(model, Max, 50 * x1 + 40 * x2)
+
+# Kendala
+@constraint(model, 5 * x1 + 4 * x2 <= 100)  # Bahan baku maksimal
+@constraint(model, 3 * x1 + 1 * x2 <= 45)   # Waktu mesin maksimal
+
+# Menyelesaikan masalah
+optimize!(model)
+
+# Menampilkan hasil
+if termination_status(model) == MOI.OPTIMAL
+    println("Solusi optimal ditemukan!")
+    println("Jumlah produk P1 (x1): ", value(x1))
+    println("Jumlah produk P2 (x2): ", value(x2))
+    println("Keuntungan maksimum: ", objective_value(model))
+else
+    println("Tidak ditemukan solusi optimal.")
+end
