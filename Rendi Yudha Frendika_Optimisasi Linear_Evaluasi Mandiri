@@ -6,7 +6,11 @@ x1 + 3x2 ≥ 1
 x1 ≥ 0, x2 ≥ 0.
 Make a sketch of the feasible set. For each of the following objective functions, give the
 optimal set and the optimal value.
-f0(x1, x2) = x1 + x2.
+(a) f0(x1, x2) = x1 + x2.
+(b) f0(x1, x2) = −x1 − x2.
+(c) f0(x1, x2) = x1.
+(d) f0(x1, x2) = max{x1, x2}.
+(e) f0(x1, x2) = x1^2 + 9x2^2
 ===========================================================================================
 This code:
 using JuMP
