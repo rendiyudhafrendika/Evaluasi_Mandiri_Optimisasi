@@ -1,3 +1,14 @@
+The Question
+Consider the optimization problem
+minimize f0(x1, x2)
+subject to 2x1 + x2 ≥ 1
+x1 + 3x2 ≥ 1
+x1 ≥ 0, x2 ≥ 0.
+Make a sketch of the feasible set. For each of the following objective functions, give the
+optimal set and the optimal value.
+f0(x1, x2) = x1 + x2.
+
+This code:
 using JuMP
 import Ipopt
 model = Model(Ipopt.Optimizer)
