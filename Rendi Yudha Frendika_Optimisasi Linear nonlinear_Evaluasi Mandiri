@@ -1,0 +1,85 @@
+The Question:
+Consider the optimization problem
+minimize f0(x1, x2)
+subject to 2x1 + x2 ≥ 1
+x1 + 3x2 ≥ 1
+x1 ≥ 0, x2 ≥ 0.
+Make a sketch of the feasible set. For each of the following objective functions, give the
+optimal set and the optimal value.
+(a) f0(x1, x2) = x1 + x2.
+(b) f0(x1, x2) = −x1 − x2.
+(c) f0(x1, x2) = x1.
+(d) f0(x1, x2) = max{x1, x2}.
+(e) f0(x1, x2) = x1^2 + 9x2^2
+===========================================================================================
+This code:
+#(a) f0(x1, x2) = x1 + x2.
+using JuMP
+import Ipopt
+model = Model(Ipopt.Optimizer)
+@variable(model, x1 >=0)
+@variable(model, x2 >=0)
+@constraint(model, 2*x1 + x2 >= 1)
+@constraint(model, x1 + 3*x2 >= 1)
+@objective(model, Min, x1 + x2)
+optimize!(model)
+optimal = objective_value(model)
+
+#(b) f0(x1, x2) = −x1 − x2.
+using JuMP
+import Ipopt
+model = Model(Ipopt.Optimizer)
+@variable(model, x1 >=0)
+@variable(model, x2 >=0)
+@constraint(model, 2*x1 + x2 >= 1)
+@constraint(model, x1 + 3*x2 >= 1)
+@objective(model, Min, -x1-x2)
+optimize!(model)
+optimal = objective_value(model)
+println(" Optimal value : $optimal")
+
+#(c) f0(x1, x2) = x1.
+using JuMP
+import Ipopt
+model = Model(Ipopt.Optimizer)
+@variable(model, x1 >=0)
+@variable(model, x2 >=0)
+@constraint(model, 2*x1 + x2 >= 1)
+@constraint(model, x1 + 3*x2 >= 1)
+@objective(model, Min, x1)
+optimize!(model)
+optimal = objective_value(model)
+println(" Optimal value : $optimal")
+
+#(d) f0(x1, x2) = max{x1, x2}.
+using JuMP
+import Ipopt
+model = Model(Ipopt.Optimizer)
+@variable(model, x1 >= 0)
+@variable(model, x2 >= 0)
+@variable(model, y)
+@constraint(model, y >= x1)
+@constraint(model, y >= x2)
+@constraint(model, 2*x1 + x2 >= 1)
+@constraint(model, x1 + 3*x2 >= 1)
+@objective(model, Max, y)
+optimize!(model)
+optimal_y = value(y)
+optimal_x1 = value(x1)
+optimal_x2 = value(x2)
+println("Optimal value y: $optimal_y")
+println("Optimal value x1: $optimal_x1")
+println("Optimal value x2: $optimal_x2")
+
+#(e) f0(x1, x2) = x1^2 + 9x2^2
+using JuMP
+import Ipopt
+model = Model(Ipopt.Optimizer)
+@variable(model, x1 >= 0)
+@variable(model, x2 >= 0)
+@constraint(model, 2*x1 + x2 >= 1)
+@constraint(model, x1 + 3*x2 >= 1)
+@objective(model, Min, x1^2 + 9*x2^2)
+optimize!(model)
+optimal = objective_value(model)
+println("Optimal value : $optimal")
