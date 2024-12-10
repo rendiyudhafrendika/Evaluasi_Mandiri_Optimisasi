@@ -1,0 +1,20 @@
+using JuMP, HiGHS
+
+# Membuat model optimisasi
+model = Model(HiGHS.Optimizer)
+
+# Mendefinisikan variabel
+@variable(model, 1 <= x <= 5)
+
+# Mendefinisikan fungsi tujuan
+@objective(model, Min, (x^2 + 4))
+
+# Menyelesaikan masalah
+optimize!(model)
+
+# Menampilkan hasil
+optimal_x = value(x)
+optimal_f = objective_value(model)
+
+println("Nilai optimal x: ", optimal_x)
+println("Nilai fungsi tujuan optimal: ", optimal_f)
