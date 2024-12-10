@@ -1,3 +1,6 @@
+#Minimalkan fungsi tujuan berikut:
+#f(x) = (x^2 + 4)
+#dengan kendala 1 <= x <= 5
 using JuMP, HiGHS
 
 # Membuat model optimisasi
