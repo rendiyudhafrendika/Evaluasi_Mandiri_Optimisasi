@@ -1,0 +1,15 @@
+using JuMP
+import Ipopt
+
+luas = Model(Ipopt.Optimizer)
+@variable(luas, p >=0)
+@variable(luas, l >=0)
+@constraint(luas, p + l == 5)
+@objective(luas, Max, p*l)
+optimize!(luas)
+optimal_p = value(p)
+optimal_l = value(l)
+optimal_luas = objective_value(luas)
+println("Optimal Panjang : $optimal_p")
+println("Optimal Lebar : $optimal_l")
+println("Optimal Luas : $optimal_luas")
