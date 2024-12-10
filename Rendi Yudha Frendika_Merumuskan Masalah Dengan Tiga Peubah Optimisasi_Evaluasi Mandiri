@@ -1,0 +1,30 @@
+using JuMP, HiGHS
+
+# Membuat model optimisasi
+model = Model(HiGHS.Optimizer)
+
+# Mendefinisikan variabel
+@variable(model, 0 <= x <= 5)  # x dalam rentang [0, 5]
+@variable(model, 0 <= y <= 8)  # y dalam rentang [0, 8]
+@variable(model, 0 <= z <= 10) # z dalam rentang [0, 10]
+
+# Menambahkan kendala
+@constraint(model, x + y + z == 10)
+
+# Mendefinisikan fungsi tujuan
+@objective(model, Min, 2x + 3y + z)
+
+# Menyelesaikan masalah
+optimize!(model)
+
+# Menampilkan hasil
+optimal_x = value(x)
+optimal_y = value(y)
+optimal_z = value(z)
+optimal_f = objective_value(model)
+
+println("Nilai optimal:")
+println("x = ", optimal_x)
+println("y = ", optimal_y)
+println("z = ", optimal_z)
+println("Nilai fungsi tujuan optimal: ", optimal_f)
